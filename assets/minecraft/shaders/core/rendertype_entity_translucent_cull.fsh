@@ -22,8 +22,8 @@ out vec4 fragColor;
 void main() {
     vec4 color = texture(Sampler0, texCoord0) * vertexColor * ColorModulator;
     if (color.a < 0.1) discard;
-	
-	int alpha = int(textureLod(Sampler0, texCoord0, 0.0).a * 255.5); // Take the alpha from the texture's LOD so it doesn't have any issues (this has hurt me before with VDE)
+        
+    int alpha = int(textureLod(Sampler0, texCoord0, 0.0).a * 255.5); // Take the alpha from the texture's LOD so it doesn't have any issues (this has hurt me before with VDE)
 
     // Switch used parts of the texture depending on where the model is displayed
     if(isGUI == 1) {
@@ -36,6 +36,6 @@ void main() {
     // Remap alpha
     if(alpha >= 253)
         color.a = 1.0;
-	
+    
     fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);
 }
